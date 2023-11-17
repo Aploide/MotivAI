@@ -43,6 +43,7 @@ struct ContentView: View {
         task.resume()
         iconcuor = "heart"
         quotetext = "loading..."
+        authortext = ""
     }
     
     func Heartz(){
