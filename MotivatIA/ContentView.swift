@@ -44,6 +44,7 @@ struct ContentView: View {
         iconcuor = "heart"
         quotetext = "loading..."
         authortext = ""
+
     }
     
     func Heartz(){
@@ -53,6 +54,8 @@ struct ContentView: View {
             iconcuor = "heart"
         }
     }
+    
+
     
     func getButtonColor() -> Color {
         if colorScheme == .dark {
