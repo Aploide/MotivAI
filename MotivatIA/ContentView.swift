@@ -78,8 +78,8 @@ struct ContentView: View {
                     Spacer()
                     
                     VStack{
-                        Text(quotetext).font(.custom("olyford-semibold" , size: 27)).multilineTextAlignment(.center)
-                        Text(authortext).font(.custom("olyford-semibold" , size: 15)).multilineTextAlignment(.center)
+                        Text(quotetext).font(.custom("olyford-semibold" , size: 27)).multilineTextAlignment(.center).accessibilityIdentifier("Quote")
+                        Text(authortext).font(.custom("olyford-semibold" , size: 15)).multilineTextAlignment(.center).accessibilityLabel("Author \(authortext)")
                     
 
                     
@@ -101,13 +101,11 @@ struct ContentView: View {
                             .accessibilityLabel("Share the caption").padding().labelsHidden()
                         
                         
-                        Button(action: {
-                            Heartz()
-                        }, label: {
-                                Image(systemName: iconcuor) .padding().scaleEffect(CGSize(width: 2.1, height: 2.1))
-                            
-                        }).accessibilityIdentifier("Add to Favorites")
-                            .foregroundColor(getButtonColor())
+                        Button(action:{Heartz()}, label: {
+                            Image(systemName: iconcuor) .padding().scaleEffect(CGSize(width: 2.1, height: 2.1))
+                            })
+                        .foregroundColor(getButtonColor())
+                        .accessibilityLabel("Add to favorites")
                         
 //                            .onTapGesture {
 //                            print("add to loved")
@@ -133,7 +131,7 @@ struct ContentView: View {
                             height: 2.1))
                                 }
                             })
-                                .accessibilityIdentifier("Next Quote")
+                                .accessibilityLabel("Next Quote")
                                 .foregroundColor(getButtonColor())
                             
 //                           .onTapGesture {
