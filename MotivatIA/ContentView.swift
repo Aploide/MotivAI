@@ -9,8 +9,10 @@ import Foundation
 import SwiftUI
 import UIKit
 
+
 struct ContentView: View {
     
+    //declaration of the variables
     @State public var quotetext = "Do the best you can, and don't take life too serious."
     
     @State public var authortext = "-Will Rogers"
@@ -21,7 +23,7 @@ struct ContentView: View {
     
     @Environment(\.colorScheme) var colorScheme
     
-    
+    //all the functions
     func SwipeUPz(){
         let category = "".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         let url = URL(string: "https://api.api-ninjas.com/v1/quotes?category="+category!)!
@@ -55,8 +57,6 @@ struct ContentView: View {
         }
     }
     
-
-    
     func getButtonColor() -> Color {
         if colorScheme == .dark {
             return Color.white
@@ -66,8 +66,6 @@ struct ContentView: View {
     
     var body: some View {
     
-        
-        
         ZStack{
                 
                 
@@ -103,12 +101,19 @@ struct ContentView: View {
                             .accessibilityLabel("Share the caption").padding().labelsHidden()
                         
                         
-                        
-                        Image(systemName: iconcuor) .padding().scaleEffect(CGSize(width: 2.1, height: 2.1)).onTapGesture {
-                            print("add to loved")
+                        Button(action: {
                             Heartz()
-                        }.accessibilityIdentifier("Button")
-                            .accessibilityLabel("Add to favorites")
+                        }, label: {
+                                Image(systemName: iconcuor) .padding().scaleEffect(CGSize(width: 2.1, height: 2.1))
+                            
+                        }).accessibilityIdentifier("Add to Favorites")
+                            .foregroundColor(getButtonColor())
+                        
+//                            .onTapGesture {
+//                            print("add to loved")
+//                            Heartz()}
+//                        }.accessibilityIdentifier("Button")
+//                            .accessibilityLabel("Add to favorites")
                         
                         Spacer()
                     }
@@ -118,15 +123,24 @@ struct ContentView: View {
                         
                         ZStack{
                             Rectangle().frame(width: 1000, height: 150, alignment: .bottom).opacity(0.001)
-                            VStack{
-                                Spacer().frame(height: 80)
-                                
-                                Image(systemName: "chevron.up").scaleEffect(CGSize(width: 2.1, height: 2.1))
-                            }.onTapGesture {
-                                print("next quote")
+                            
+                            Button(action: {
                                 SwipeUPz()
-                                iconcuor = "heart"}.accessibilityLabel("Button")
+                            }, label: {
+                                VStack {
+                                    Spacer().frame(height: 80)
+                                    Image(systemName: "chevron.up").scaleEffect(CGSize(width: 2.1,
+                            height: 2.1))
+                                }
+                            })
                                 .accessibilityIdentifier("Next Quote")
+                                .foregroundColor(getButtonColor())
+                            
+//                           .onTapGesture {
+//                                print("next quote")
+//                                SwipeUPz()
+//                                iconcuor = "heart"}
+                                
                         }
                         
                     }
@@ -137,6 +151,9 @@ struct ContentView: View {
         
     }
 }
+
+
+//swipe up zone view
 
 struct SwipeUpView<Content: View>: View {
     let onSwipeUp: () -> Void
